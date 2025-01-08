@@ -133,3 +133,5 @@ dmypy.json
 
 # that should not change!
 # used in self-checking
+
+.codegpt
