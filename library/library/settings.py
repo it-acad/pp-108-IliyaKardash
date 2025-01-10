@@ -43,6 +43,11 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
+AUTHENTICATION_BACKENDS = [
+    'user.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -58,7 +63,7 @@ ROOT_URLCONF = 'library.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,6 +137,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Logger required settings.
+LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 
 LOGGING = {
     'version': 1,
