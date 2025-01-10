@@ -21,6 +21,6 @@ from authentication import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', starting_page, name='starting_page'),
-    path('user/', include('authentication.urls')),
-    path('account/', include('django.contrib.auth.urls')),
+    path('authentication/', include('authentication.urls')),
+    path('', include('django.contrib.auth.urls')),
 ]

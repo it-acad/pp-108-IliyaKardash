@@ -31,15 +31,15 @@ def register(request):
                 email=email,
                 role=int(role),
                 middle_name='',
-                password=make_password(password)
+                password=password
             )
             user.save()
             login(request, user)
             return redirect('starting_page')
 
-        return render(request, 'user/register.html', {'errors': errors})
+        return render(request, 'authentication/register.html', {'errors': errors})
 
-    return render(request, 'user/register.html')
+    return render(request, 'authentication/register.html')
 
 
 def login_user(request):
@@ -54,7 +54,7 @@ def login_user(request):
         else:
             return render(request, 'registration/login.html', {'error': 'Invalid email or password'})
 
-    return render(request, 'registration/login.html')
+    return redirect('home')
 
 
 def logout_view(request):
