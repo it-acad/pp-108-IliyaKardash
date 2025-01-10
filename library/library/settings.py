@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = 'authentication.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
-    'user.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
@@ -139,6 +138,7 @@ STATIC_URL = '/static/'
 # Logger required settings.
 # LOGOUT_REDIRECT_URL = '/accounts/login/'
 # LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/home/'
 
 LOGGING = {
     'version': 1,
