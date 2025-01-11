@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Order</title>
+    <link rel="stylesheet" href="{% static 'order/css/order.css' %}" />
+  </head>
+  <body>
+    <h1>Create Order</h1>
+
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <!-- User Selection (Select which user is making the order) -->
+      <label for="user_id">Select User:</label>
+      <select name="user_id" required>
+        {% for user in users %}
+        <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</option>
+        {% endfor %}
+      </select>
+
+      <!-- Book Selection (Select which book to order) -->
+      <label for="book_id">Select Book:</label>
+      <select name="book_id" required>
+        {% for book in books %}
+        <option value="{{ book.id }}">{{ book.name }}</option>
+        {% endfor %}
+      </select>
+
+      <!-- Desired End Date of the Order -->
+      <label for="plated_end_at">Planned End Date:</label>
+      <input type="date" name="plated_end_at" required />
+
+      <button type="submit">Create Order</button>
+    </form>
+
+    <a href="{% url 'all_orders' %}">Back to All Orders</a>
+  </body>
+</html>

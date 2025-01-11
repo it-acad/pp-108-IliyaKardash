@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders</title>
+    <link rel="stylesheet" href="{% static 'order/css/order.css' %}" />
+  </head>
+  <body>
+    <h1>My Orders</h1>
+
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Book Name</th>
+          <th>Created At</th>
+          <th>Planned End Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.book.name }}</td>
+          <td>{{ order.created_at }}</td>
+          <td>{{ order.plated_end_at }}</td>
+          <td>{{ order.end_at|default:"Not yet closed" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p>You have no orders yet.</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}">Back to Home</a>
+  </body>
+</html>

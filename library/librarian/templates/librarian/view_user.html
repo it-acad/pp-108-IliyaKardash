@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Details</title>
+    <link rel="stylesheet" href="{% static 'librarian/css/librarian.css' %}" />
+  </head>
+  <body>
+    <h1>User Details</h1>
+
+    <p><strong>ID:</strong> {{ user.id }}</p>
+    <p><strong>First Name:</strong> {{ user.first_name }}</p>
+    <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Role:</strong> {{ user.get_role_display }}</p>
+
+    <a href="{% url 'all_users' %}">Back to All Users</a>
+  </body>
+</html>

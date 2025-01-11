@@ -1,0 +1,100 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  color: #333;
+}
+
+/* Table Styles for All Users Page */
+table {
+  width: 90%;
+  margin: 30px auto;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+table a:hover {
+  text-decoration: underline;
+}
+
+/* Footer Link */
+footer {
+  text-align: center;
+  margin-top: 30px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Styles for User Detail Page */
+p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+strong {
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 16px;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  table {
+    width: 100%;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  a {
+    font-size: 14px;
+  }
+}

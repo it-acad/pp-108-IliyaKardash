@@ -83,6 +83,10 @@ class CustomUser(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     objects = CustomUserManager()
 
+    @property
+    def is_librarian(self):
+        return self.role == 1
+
     def __str__(self):
         """
         Magic method is redefined to show all information about CustomUser.

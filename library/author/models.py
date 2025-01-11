@@ -16,8 +16,8 @@ class Author(models.Model):
         type patronymic: str max_length=20
     """
     name = models.CharField(blank=True, max_length=20)
-    surname = models.CharField(blank=True, max_length=20)
-    patronymic = models.CharField(blank=True, max_length=20)
+    surname = models.CharField(null=True, max_length=20)
+    patronymic = models.CharField(blank=True, null=True, max_length=20)
     books = models.ManyToManyField('book.Book', related_name='written_by')
     id = models.AutoField(primary_key=True)
 

@@ -23,5 +23,8 @@ urlpatterns = [
     path('home/', home_view, name='home'),
     path('', include('django.contrib.auth.urls')),
     path('authentication/', include('authentication.urls')),
-    path('book/', include('book.urls'))
+    path('book/', include('book.urls')),
+    path('librarian/', include('librarian.urls')),
+    path('author/', include('author.urls')),
+    path('order/', include('order.urls')),
 ]
