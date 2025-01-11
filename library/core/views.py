@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def starting_page(request):
@@ -6,4 +6,9 @@ def starting_page(request):
 
 
 def home_view(request):
-    return render(request, 'home.html')
+
+    if request.user.is_authenticated:
+        role = request.user.role
+        return render(request, 'home.html', {'role': role})
+    else:
+        return redirect('login')
