@@ -3,18 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Book List</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Book List</h1>
-    <ul>
-        {% for book in books %}
-            <li>{{ book.name }} by 
-                {% for author in book.authors.all %}
-                    {{ author.name }}{% if not forloop.last %}, {% endif %}
+    <div class="container books-list-section">
+        <h1>Book List</h1>
+        <form method="GET" action="{% url 'book_list' %}">
+            <input type="text" name="q" placeholder="Search..." value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Count</th>
+                    <th>Author(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>{{ book.id }}</td>
+                        <td>{{ book.name }}</td>
+                        <td>{{ book.description }}</td>
+                        <td>{{ book.count }}</td>
+                        <td>
+                            {% for author in book.authors.all %}
+                                {{ author.name }} {{ author.patronymic }} {{ author.surname }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                    </tr>
                 {% endfor %}
-                (Description: {{ book.description }}, Count: {{ book.count }})
-            </li>
-        {% endfor %}
-    </ul>
+            </tbody>
+        </table>
+        <a href="{% url 'home' %}" class="book-list-home-btn">Back to home Page</a>
+    </div>
 </body>
 </html>

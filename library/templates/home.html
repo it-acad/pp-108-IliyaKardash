@@ -15,6 +15,7 @@
       {% if role == 1 %}
       <div class="librarian-section">
         <p>Here are the admin options for the librarian.</p>
+        <a href="{% url 'book_list' %}" class="button">List of all books</a>
         <a href="{% url 'all_users' %}" class="button">List of all users</a>
         <a href="{% url 'all_authors' %}" class="button">List of all authors</a>
         <a href="{% url 'create_author' %}" class="button">Create a new author</a>
@@ -23,6 +24,7 @@
       </div>
       {% else %}
       <div class="visitor-section">
+        <a href="{% url 'book_list' %}" class="button">List of all books</a>
         <p>You are currently logged in as a visitor.</p>
         <a href="{% url 'my_orders' %}" class="button">List of my orders</a>
       </div>

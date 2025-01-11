@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Order
+from .models import Book
 from authentication.models import CustomUser
 from django.utils import timezone
 
