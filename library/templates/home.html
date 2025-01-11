@@ -14,10 +14,12 @@
     <a href="{% url 'all_users' %}">List of all users</a>
     <a href="{% url 'all_authors' %}">List of all authors</a>
     <a href="{% url 'create_author' %}">Create a new author</a>
+    <a href="{% url 'create_order' %}">Create an order</a>
+    <a href="{% url 'all_orders' %}">List of all orders</a>
     {% else %}
     <p>You are currently logged in as a visitor.</p>
+    <a href="{% url 'my_orders' %}">List of my orders</a>
     {% endif %}
-
     <a href="{% url 'logout' %}">Logout</a>
   </body>
 </html>
