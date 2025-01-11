@@ -1,6 +1,6 @@
 from django.db import models
 
-import book.models
+# import book.models
 
 
 class Author(models.Model):
@@ -18,7 +18,7 @@ class Author(models.Model):
     name = models.CharField(blank=True, max_length=20)
     surname = models.CharField(blank=True, max_length=20)
     patronymic = models.CharField(blank=True, max_length=20)
-    books = models.ManyToManyField(book.models.Book, related_name='authors')
+    books = models.ManyToManyField('book.Book', related_name='written_by')
     id = models.AutoField(primary_key=True)
 
     def __str__(self):
@@ -27,7 +27,8 @@ class Author(models.Model):
         :return: author id, author name, author surname, author patronymic
         """
         return f"\'id\': {self.pk}, \'name\': \'{self.name}\'," \
-               f" \'surname\': \'{self.surname}\', \'patronymic\': \'{self.patronymic}\'"
+            f" \'surname\': \'{self.surname}\', \'patronymic\': \'{
+                self.patronymic}\'"
 
     def __repr__(self):
         """

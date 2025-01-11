@@ -2,6 +2,7 @@ import datetime
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
+from datetime import datetime
 
 ROLE_CHOICES = (
     (0, 'visitor'),
@@ -72,8 +73,9 @@ class CustomUser(AbstractBaseUser):
     middle_name = models.CharField(max_length=20, default=None)
     email = models.CharField(max_length=100, unique=True, default=None)
     password = models.CharField(default=None, max_length=255)
-    created_at = models.DateTimeField(editable=False, auto_now=datetime.datetime.now())
-    updated_at = models.DateTimeField(auto_now=datetime.datetime.now())
+    created_at = models.DateTimeField(
+        editable=False, auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
     role = models.IntegerField(choices=ROLE_CHOICES, default=0)
     is_active = models.BooleanField(default=False)
     id = models.AutoField(primary_key=True)
@@ -131,7 +133,7 @@ class CustomUser(AbstractBaseUser):
         return False
 
     @staticmethod
-    def create(email, password, first_name=None, middle_name=None, last_name=None):
+    def create(email, password, first_name, middle_name, last_name):
         """
         :param first_name: first name of a user
         :type first_name: str
@@ -204,6 +206,10 @@ class CustomUser(AbstractBaseUser):
         :return: None
         """
         user_to_update = CustomUser.objects.filter(email=self.email).first()
+
+        if not user_to_update:
+            raise ValueError(f'No user is found with email {self.email}')
+
         if first_name != None and len(first_name) <= 20:
             user_to_update.first_name = first_name
         if last_name != None and len(last_name) <= 20:

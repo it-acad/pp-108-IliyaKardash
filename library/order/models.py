@@ -21,10 +21,12 @@ class Order(models.Model):
            type plated_end_at: int (timestamp)
        """
     book = models.ForeignKey(Book, on_delete=models.CASCADE, default=None)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, default=None)
     created_at = models.DateTimeField(auto_now_add=True)
     end_at = models.DateTimeField(default=None, null=True, blank=True)
     plated_end_at = models.DateTimeField(default=None)
+    # id = models.AutoField(primary_key=True)
 
     def __str__(self):
         """
@@ -33,25 +35,25 @@ class Order(models.Model):
         """
         if self.end_at == None:
             return f"\'id\': {self.pk}, " \
-                   f"\'user\': CustomUser(id={self.user.pk})," \
-                   f" \'book\': Book(id={self.book.pk})," \
-                   f" \'created_at\': \'{self.created_at}\'," \
-                   f" \'end_at\': {self.end_at}," \
-                   f" \'plated_end_at\': \'{self.plated_end_at}\'"
+                f"\'user\': CustomUser(id={self.user.pk})," \
+                f" \'book\': Book(id={self.book.pk})," \
+                f" \'created_at\': \'{self.created_at}\'," \
+                f" \'end_at\': {self.end_at}," \
+                f" \'plated_end_at\': \'{self.plated_end_at}\'"
         else:
             return f"\'id\': {self.pk}, " \
-                   f"\'user\': CustomUser(id={self.user.pk})," \
-                   f" \'book\': Book(id={self.book.pk})," \
-                   f" \'created_at\': \'{self.created_at}\'," \
-                   f" \'end_at\': \'{self.end_at}\'," \
-                   f" \'plated_end_at\': \'{self.plated_end_at}\'"
+                f"\'user\': CustomUser(id={self.user.pk})," \
+                f" \'book\': Book(id={self.book.pk})," \
+                f" \'created_at\': \'{self.created_at}\'," \
+                f" \'end_at\': \'{self.end_at}\'," \
+                f" \'plated_end_at\': \'{self.plated_end_at}\'"
 
     def __repr__(self):
         """
         This magic method is redefined to show class and id of Book object.
         :return: class, id
         """
-        return f'{self.__class__.__name__}(id={self.id})'
+        return f'{self.__class__.__name__}(id={id})'
 
     def to_dict(self):
         """
