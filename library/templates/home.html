@@ -12,6 +12,8 @@
     {% if role == 1 %}
     <p>Here are the admin options for the librarian.</p>
     <a href="{% url 'all_users' %}">List of all users</a>
+    <a href="{% url 'all_authors' %}">List of all authors</a>
+    <a href="{% url 'create_author' %}">Create a new author</a>
     {% else %}
     <p>You are currently logged in as a visitor.</p>
     {% endif %}
