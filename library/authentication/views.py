@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, logout, login
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import authenticate, logout, login, get_backends
 from django.contrib.auth.hashers import make_password
 from authentication.models import CustomUser
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -32,11 +33,14 @@ def register(request):
                 email=email,
                 role=int(role),
                 middle_name='',
-                password=password,
-                is_active=True
+                password=make_password(password)
             )
             user.save()
-            login(request, user)
+
+            backend = get_backends()[0]
+
+            login(request, user, backend=backend.__module__ +
+                  '.'+backend.__class__.__name__)
             return redirect('login')
 
         return render(request, 'authentication/register.html', {'errors': errors})
@@ -48,13 +52,14 @@ def login_user(request):
     if request.method == 'POST':
         email = request.POST.get('username')
         password = request.POST.get('password')
-        print(f"Email: {email}, Password: {password}")
 
         user = authenticate(request, username=email, password=password)
         if user is not None:
+            user.save()
             login(request, user)
             return redirect('home')
         else:
+            print('Authentication failed')
             return render(request, 'authentication/login.html', {'error': 'Invalid email or password'})
 
     return render(request, 'authentication/login.html')
@@ -62,4 +67,4 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')

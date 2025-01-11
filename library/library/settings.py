@@ -45,6 +45,7 @@ AUTH_USER_MODEL = 'authentication.CustomUser'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
+    'authentication.backends.CustomBackend',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,13 @@ STATIC_URL = '/static/'
 # LOGOUT_REDIRECT_URL = '/accounts/login/'
 # LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/home/'
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"
+SESSION_COOKIE_AGE = 1209600
+SESSION_SAVE_EVERY_REQUEST = True
+
+SESSION_COOKIE_SECURE = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 LOGGING = {
     'version': 1,
