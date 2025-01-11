@@ -4,22 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
   </head>
   <body>
-    <h1>Welcome to the Home Page</h1>
-    <p>Welcome, {{ user.first_name }}!</p>
+    <div class="container">
+      <h1>Welcome to the Home Page</h1>
+      <p>Welcome, {{ user.first_name }}!</p>
 
-    {% if role == 1 %}
-    <p>Here are the admin options for the librarian.</p>
-    <a href="{% url 'all_users' %}">List of all users</a>
-    <a href="{% url 'all_authors' %}">List of all authors</a>
-    <a href="{% url 'create_author' %}">Create a new author</a>
-    <a href="{% url 'create_order' %}">Create an order</a>
-    <a href="{% url 'all_orders' %}">List of all orders</a>
-    {% else %}
-    <p>You are currently logged in as a visitor.</p>
-    <a href="{% url 'my_orders' %}">List of my orders</a>
-    {% endif %}
-    <a href="{% url 'logout' %}">Logout</a>
+      {% if role == 1 %}
+      <div class="librarian-section">
+        <p>Here are the admin options for the librarian.</p>
+        <a href="{% url 'all_users' %}" class="button">List of all users</a>
+        <a href="{% url 'all_authors' %}" class="button">List of all authors</a>
+        <a href="{% url 'create_author' %}" class="button">Create a new author</a>
+        <a href="{% url 'create_order' %}" class="button">Create an order</a>
+        <a href="{% url 'all_orders' %}" class="button">List of all orders</a>
+      </div>
+      {% else %}
+      <div class="visitor-section">
+        <p>You are currently logged in as a visitor.</p>
+        <a href="{% url 'my_orders' %}" class="button">List of my orders</a>
+      </div>
+      {% endif %}
+      <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </div>
   </body>
 </html>
