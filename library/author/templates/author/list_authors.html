@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Authors</title>
+  </head>
+  <body>
+    <h1>All Authors</h1>
+
+    {% if error %}
+    <p style="color: red">{{ error }}</p>
+    {% endif %}
+
+    <ul>
+      {% for author in authors %}
+      <li>
+        {{ author.name }} {{ author.surname }} {{ author.patronymic }}
+        <a href="{% url 'delete_author' author.id %}">Delete</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li class="alert alert-{{ message.tags}}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a href="{% url 'home' %}">Back to Home</a>
+  </body>
+</html>

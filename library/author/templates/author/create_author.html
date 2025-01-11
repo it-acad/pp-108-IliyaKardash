@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Author</title>
+  </head>
+  <body>
+    <h1>Create a New Author</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="name">Author Name:</label>
+      <input type="text" id="name" name="name" required />
+      <label for="name">Author Surname:</label>
+      <input type="text" id="surname" name="surname" required />
+      <label for="name">Author Patronymic:</label>
+      <input type="text" id="Patronymic" name="patronymic" required />
+      <button type="submit">Create</button>
+    </form>
+
+    <a href="{% url 'all_authors' %}">Back to All Authors</a>
+  </body>
+</html>
