@@ -8,7 +8,7 @@
   <body>
     <h1>Welcome to the Home Page</h1>
     <p>Welcome, {{ user.first_name }}!</p>
-
+    <a href="{% url 'book_list' %}">Book List</a>
     <a href="{% url 'logout' %}">Logout</a>
   </body>
 </html>
