@@ -3,6 +3,7 @@ from django.http import HttpResponseForbidden
 from .models import Author
 from book.models import Book  # Assuming you have a Book model
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def is_librarian(user):
@@ -25,6 +26,7 @@ def create_author(request):
         name = request.POST.get('name')
         surname = request.POST.get('surname')
         patronymic = request.POST.get('patronymic')
+        print(f"Name: {name}, Surname: {surname}, Patronymic: {patronymic}")
         if name:
             Author.objects.create(
                 name=name, surname=surname, patronymic=patronymic)
@@ -36,12 +38,10 @@ def create_author(request):
 def delete_author(request, author_id):
     if not is_librarian(request.user):
         return HttpResponseForbidden("You are not authorized to delete authors.")
-    author = get_object_or_404(Author, id=author_id)
-    if not Book.objects.filter(author=author).exists():
-        author.delete()
+    author = get_object_or_404(Author, pk=author_id)
+    if author.books.exists():
+        messages.error(request, 'You cannot delete this author')
         return redirect('all_authors')
-    else:
-        return render(request, 'author/list_authors.html', {
-            'authors': Author.objects.all(),
-            'error': 'Cannot delete an author who is attached to a book.'
-        })
+    author.delete()
+    messages.success(request, 'Author was successfully deleted')
+    return redirect('all_authors')
