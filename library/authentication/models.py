@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from datetime import datetime
 
@@ -78,10 +79,19 @@ class CustomUser(AbstractBaseUser):
     updated_at = models.DateTimeField(auto_now_add=True)
     role = models.IntegerField(choices=ROLE_CHOICES, default=0)
     is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
     id = models.AutoField(primary_key=True)
 
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'middle_name']
     objects = CustomUserManager()
+
+    def has_perm(self, perm, obj=None):
+        return self.is_superuser
+
+    def has_module_perms(self, app_label):
+        return self.is_superuser
 
     @property
     def is_librarian(self):
