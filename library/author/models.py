@@ -18,7 +18,7 @@ class Author(models.Model):
     name = models.CharField(blank=True, max_length=20)
     surname = models.CharField(null=True, max_length=20)
     patronymic = models.CharField(blank=True, null=True, max_length=20)
-    books = models.ManyToManyField('book.Book', related_name='written_by')
+    books = models.ManyToManyField('book.Book', related_name='works')
     id = models.AutoField(primary_key=True)
 
     def __str__(self):
