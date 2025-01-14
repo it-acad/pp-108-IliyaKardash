@@ -87,12 +87,15 @@ admin.site.register(Book, BookAdmin)
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'surname', 'patronymic')
+    list_display = ('id', 'name', 'surname', 'patronymic', 'get_books')
     list_filter = ('name', 'surname')
 
     fieldsets = (
         ('Personal Details', {
             'fields': ('name', 'surname', 'patronymic'),
+        }),
+        ('Books', {
+            'fields': ('books',),
         }),
     )
 
