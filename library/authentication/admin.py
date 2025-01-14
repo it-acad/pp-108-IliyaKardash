@@ -54,7 +54,7 @@ class AuthorNameField(SimpleListFilter):
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('id', 'get_title', 'get_full_author_name',
+    list_display = ('id', 'get_title', 'get_authors',
                     'description', 'year_of_publication', 'date_of_issue')
     readonly_fields = ('name', 'year_of_publication')
     list_filter = ('name', AuthorNameField, 'year_of_publication')
@@ -71,7 +71,7 @@ class BookAdmin(admin.ModelAdmin):
     filter_horizontal = ('authors',)
 
     def get_authors(self, obj):
-        return ''.join([f'{author.name} {author.surname}' for author in obj.authors.all()])
+        return ', '.join([f'{author.name} {author.surname}' for author in obj.authors.all()])
     get_authors.short_description = 'Authors'
 
     def get_full_author_name(self, obj):
@@ -87,15 +87,12 @@ admin.site.register(Book, BookAdmin)
 
 
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'surname', 'patronymic', 'get_books')
+    list_display = ('id', 'name', 'surname', 'patronymic')
     list_filter = ('name', 'surname')
 
     fieldsets = (
         ('Personal Details', {
             'fields': ('name', 'surname', 'patronymic'),
-        }),
-        ('Books', {
-            'fields': ('books',),
         }),
     )
 
